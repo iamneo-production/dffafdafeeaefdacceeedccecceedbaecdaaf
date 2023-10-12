@@ -3,13 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Player } from '../../models/player.model';
 import { Team } from '../../models/team.model';
-import { AssignPlayer } from 'src/models/assignPlayer.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrganizerService {
-  private baseUrl = 'https://localhost:7258/api/organizer'; // Replace with your Spring Boot backend URL
+  private baseUrl = 'http://localhost:8080/api/organizer'; // Replace with your Spring Boot backend URL
 
   constructor(private http: HttpClient) { }
 
@@ -18,19 +17,15 @@ export class OrganizerService {
   }
 
   getTeams(): Observable<Team[]> {
-    return this.http.get<Team[]>(`https://localhost:7258/api/admin/teams`);
+    return this.http.get<Team[]>(`http://localhost:8080/api/admin/teams`);
   }
 
-  assignPlayerToTeam(assign:AssignPlayer): Observable<any> {
-    console.log("ddd"+assign);
-
-    // return this.http.post<void>(`${this.baseUrl}/assign-player?playerId=${playerId}&teamId=${teamId}`, {});
-    return this.http.post<void>(`${this.baseUrl}/assign`, assign);
+  assignPlayerToTeam(playerId: number, teamId: number): Observable<any> {
+    return this.http.post<void>(`${this.baseUrl}/assign-player?playerId=${playerId}&teamId=${teamId}`, {});
   }
 
   releasePlayerFromTeam(playerId: number): Observable<void> {
-
-    return this.http.post<void>(`${this.baseUrl}/release/${playerId}`, {});
+    return this.http.post<void>(`${this.baseUrl}/release-player/${playerId}`, {});
   }
 
 }

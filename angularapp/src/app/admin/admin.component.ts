@@ -36,11 +36,9 @@ export class AdminComponent implements OnInit {
   }
 
   createTeam(newTeam:Team): void {
-    console.log("teamofnew"+newTeam);
+    console.log(newTeam);
 
     this.adminService.createTeam(newTeam).subscribe(() => {
-      console.log("teamofnew"+newTeam);
-
       this.getTeams();
      // this.newTeam = { name: '', maximumBudget: 0 };
     });

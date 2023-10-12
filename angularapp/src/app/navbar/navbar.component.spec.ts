@@ -30,11 +30,11 @@
 //     fixture.detectChanges();
 //   });
 
-//   it('should create', () => {
+//   fit('should create', () => {
 //     expect(component).toBeTruthy();
 //   });
 
-//   it('should show login and register links when not logged in', () => {
+//   fit('should show login and register links when not logged in', () => {
 //     component.isLoggedIn = false;
 //     component.isAdmin = false;
 //     component.isOrganizer = false;
@@ -47,7 +47,7 @@
 //     expect(registerLink).toBeTruthy();
 //   });
 
-//   it('should show admin link when isAdmin is true', () => {
+//   fit('should show admin link when isAdmin is true', () => {
 //     component.isAdmin = true;
 //     fixture.detectChanges();
 
@@ -55,7 +55,7 @@
 //     expect(adminLink).toBeTruthy();
 //   });
 
-//   it('should show organizer link when isOrganizer is true', () => {
+//   fit('should show organizer link when isOrganizer is true', () => {
 //     component.isOrganizer = true;
 //     fixture.detectChanges();
 
@@ -91,7 +91,7 @@
 //     expect(authService.login).toHaveBeenCalledWith('organizer', 'password'); // Adjust the arguments as needed
 //   });
 
-//   fit('should call logout method on form submission', () => {
+//   it('should call logout method on form submission', () => {
 //     spyOn(component, 'logout');
 
 //     const button = fixture.nativeElement.querySelector('button');

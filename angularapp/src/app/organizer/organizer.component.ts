@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { OrganizerService } from '../services/organizer.service';
 import { Player } from '../../models/player.model';
 import { Team } from '../../models/team.model';
-import { AssignPlayer } from 'src/models/assignPlayer.model';
 
 @Component({
   selector: 'app-organizer',
@@ -10,19 +9,14 @@ import { AssignPlayer } from 'src/models/assignPlayer.model';
   styleUrls: ['./organizer.component.css']
 })
 export class OrganizerComponent implements OnInit {
-  unsoldPlayers: Player[]=[
-  //   { id: 1, name: 'Player X', age: 25, category: 'Category A', biddingPrice: 50 },
-  // { id: 2, name: 'Player Y', age: 28, category: 'Category B', biddingPrice: 60 },
+  unsoldPlayers: Player[]=[{ id: 1, name: 'Player X', age: 25, category: 'Category A', biddingPrice: 50 },
+  { id: 2, name: 'Player Y', age: 28, category: 'Category B', biddingPrice: 60 },
   ];
   teams: Team[]=[
-    // { id: 1, name: 'Team A', maximumBudget: 100 },
-    // { id: 2, name: 'Team B', maximumBudget: 150 },
-  ];
+    { id: 1, name: 'Team A', maximumBudget: 100 },
+    { id: 2, name: 'Team B', maximumBudget: 150 },];
   categories: string[]=[]; // Assuming you have a list of categories from the backend
   selectedCategory: string = '';
-
-  assign: AssignPlayer = { playerId:0, teamId:0 };
-
 
 
 
@@ -75,15 +69,10 @@ export class OrganizerComponent implements OnInit {
     if (!player.selectedTeamId) {
       return; // No team selected, do nothing
     }
-    // console.log(assign.teamId);
-    // console.log(assign.playerId);
-    this.assign = { playerId:player.id, teamId:player.selectedTeamId }
-  // assign: AssignPlayer = { playerId:0, teamId:0 };
-  console.log(this.assign);
+    console.log(player.selectedTeamId);
+    console.log(player.id);
 
-
-
-    this.organizerService.assignPlayerToTeam(this.assign).subscribe((data) => {
+    this.organizerService.assignPlayerToTeam(player.id, player.selectedTeamId).subscribe((data) => {
       // After assigning the player, remove them from the unsoldPlayers list
       if(data === true)
       this.getUnsoldPlayers();
@@ -93,21 +82,17 @@ export class OrganizerComponent implements OnInit {
     // releasePlayerFromTeam(team: Team): void {
     //   // Implement the release player from team functionality here
     // }
-    releasePlayerFromTeam(Player: Player): void {
-      console.log(Player.id);
-      // console.log(Player.id);
-
-
-      this.organizerService.releasePlayerFromTeam(Player.id).subscribe(() => {
+    releasePlayerFromTeam(team: Team): void {
+      this.organizerService.releasePlayerFromTeam(team.id).subscribe(() => {
         // After releasing the player, fetch the updated unsold players list
         this.getUnsoldPlayers();
       });
     }
 
-  //   assignTeam(team: Team, player: Player): void{
-  //   this.organizerService.assignPlayerToTeam(player.id,team.id).subscribe(() => {
-  //     // After releasing the player, fetch the updated unsold players list
-  //     this.getUnsoldPlayers();
-  //   });
-  // }
+    assignTeam(team: Team, player: Player): void{
+    this.organizerService.assignPlayerToTeam(player.id,team.id).subscribe(() => {
+      // After releasing the player, fetch the updated unsold players list
+      this.getUnsoldPlayers();
+    });
+  }
 }

@@ -30,18 +30,14 @@ export class RegistrationComponent {
 
     this.authService.register(this.username, this.password, this.role).subscribe(
       (user) => {
-        console.log(user);
-
         console.log(this.role)
-        if (user.role === 'admin') {
+        if (user.role === 'ADMIN') {
           this.router.navigate(['/admin']);
-        } else if (user.role === 'organizer') {
+        } else if (user.role === 'ORGANIZER') {
           this.router.navigate(['/organizer']);
         }
       },
       (error) => {
-        console.log(error);
-
         // Handle registration error, display a message, etc.
       }
     );
