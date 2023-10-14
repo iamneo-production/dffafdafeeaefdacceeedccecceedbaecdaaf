@@ -5,6 +5,8 @@ then
     echo "project folder present"
     cp /home/coder/project/workspace/karma/karma.conf.js /home/coder/project/workspace/angularapp/karma.conf.js;
 
+
+
     # checking for app-routing component
     if [ -d "/home/coder/project/workspace/angularapp/src/app/routing" ]
     then
